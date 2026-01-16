@@ -1,0 +1,91 @@
+@model NodeConfigurator.Web.Models.ViewModels.BrowseViewModel
+@{
+    ViewData["Title"] = "OPC-UA Browser";
+}
+
+<div class="container-fluid mt-3">
+    <div class="row">
+        <div class="col-12">
+            <h2>
+                <i class="bi bi-tree-fill"></i> OPC-UA Node Browser
+            </h2>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <i class="bi bi-diagram-3-fill"></i> Node-Hierarchie
+                </div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <input type="text" id="search" class="form-control" placeholder="Suchen..." />
+                    </div>
+                    <div id="treeview" style="height: 600px; overflow-y: auto;"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card mb-3">
+                <div class="card-header bg-success text-white">
+                    <i class="bi bi-check-square-fill"></i> Ausgewählte Variablen
+                    <span class="badge bg-light text-dark float-end" id="selectedCount">@Model.SelectedNodes.Count</span>
+                </div>
+                <div class="card-body" style="height: 300px; overflow-y: auto;">
+                    <div id="selectedNodes">
+                        @if (Model.SelectedNodes.Any())
+                        {
+                            @foreach (var node in Model.SelectedNodes)
+                            {
+                                <div class="selected-node-item mb-2 p-2 border rounded" data-node-id="@node.NodeId">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <strong>@node.DisplayName</strong>
+                                            <br />
+                                            <small class="text-muted">@node.NodeId</small>
+                                            @if (!string.IsNullOrEmpty(node.DataType))
+                                            {
+                                                <br />
+                                                <span class="badge bg-info">@node.DataType</span>
+                                            }
+                                        </div>
+                                        <button class="btn btn-sm btn-danger remove-node" data-node-id="@node.NodeId">
+                                            <i class="bi bi-x"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            }
+                        }
+                        else
+                        {
+                            <div class="text-center text-muted">
+                                <i class="bi bi-inbox" style="font-size: 3rem;"></i>
+                                <p>Keine Variablen ausgewählt</p>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header bg-info text-white">
+                    <i class="bi bi-info-circle-fill"></i> Node-Details
+                </div>
+                <div class="card-body" id="nodeDetails" style="height: 270px; overflow-y: auto;">
+                    <div class="text-center text-muted">
+                        <i class="bi bi-cursor" style="font-size: 3rem;"></i>
+                        <p>Wählen Sie einen Knoten aus</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jstree@3.3.12/dist/themes/default/style.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/jstree@3.3.12/dist/jstree.min.js"></script>
+    <script src="~/js/opcua-browser.js" asp-append-version="true"></script>
+}

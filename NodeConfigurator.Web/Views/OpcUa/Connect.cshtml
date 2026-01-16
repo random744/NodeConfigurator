@@ -1,0 +1,134 @@
+@model NodeConfigurator.Web.Models.ViewModels.ConnectionViewModel
+@{
+    ViewData["Title"] = "OPC-UA Verbindung";
+}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <h2>
+                <i class="bi bi-plug-fill"></i> OPC-UA Server-Verbindung
+            </h2>
+            
+            <div class="card mt-4">
+                <div class="card-body">
+                    <form asp-action="Connect" method="post">
+                        <div class="mb-3">
+                            <label asp-for="ServerUrl" class="form-label">Server-URL</label>
+                            <input asp-for="ServerUrl" class="form-control" placeholder="opc.tcp://localhost:4840" />
+                            <span asp-validation-for="ServerUrl" class="text-danger"></span>
+                            
+                            @if (Model.RecentUrls.Any())
+                            {
+                                <div class="form-text">
+                                    Zuletzt verwendet:
+                                    @foreach (var url in Model.RecentUrls.Take(3))
+                                    {
+                                        <button type="button" class="btn btn-sm btn-outline-secondary ms-2 recent-url" data-url="@url">
+                                            @url
+                                        </button>
+                                    }
+                                </div>
+                            }
+                        </div>
+
+                        <div class="mb-3">
+                            <div class="form-check">
+                                <input asp-for="UseAuthentication" class="form-check-input" type="checkbox" id="useAuth" />
+                                <label asp-for="UseAuthentication" class="form-check-label" for="useAuth">
+                                    Authentifizierung verwenden
+                                </label>
+                            </div>
+                        </div>
+
+                        <div id="authSection" style="display: none;">
+                            <div class="mb-3">
+                                <label asp-for="Username" class="form-label">Benutzername</label>
+                                <input asp-for="Username" class="form-control" />
+                            </div>
+
+                            <div class="mb-3">
+                                <label asp-for="Password" class="form-label">Passwort</label>
+                                <input asp-for="Password" type="password" class="form-control" />
+                            </div>
+                        </div>
+
+                        <div class="accordion mb-3" id="advancedSettings">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseAdvanced">
+                                        <i class="bi bi-gear"></i> Erweiterte Einstellungen
+                                    </button>
+                                </h2>
+                                <div id="collapseAdvanced" class="accordion-collapse collapse" data-bs-parent="#advancedSettings">
+                                    <div class="accordion-body">
+                                        <div class="mb-3">
+                                            <label asp-for="SecurityMode" class="form-label">Security Mode</label>
+                                            <select asp-for="SecurityMode" class="form-select">
+                                                <option value="None">None</option>
+                                                <option value="Sign">Sign</option>
+                                                <option value="SignAndEncrypt">Sign and Encrypt</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label asp-for="SecurityPolicy" class="form-label">Security Policy</label>
+                                            <select asp-for="SecurityPolicy" class="form-select">
+                                                <option value="None">None</option>
+                                                <option value="Basic256Sha256">Basic256Sha256</option>
+                                                <option value="Aes128_Sha256_RsaOaep">Aes128_Sha256_RsaOaep</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <div class="form-check">
+                                                <input asp-for="AutoAcceptCertificates" class="form-check-input" type="checkbox" />
+                                                <label asp-for="AutoAcceptCertificates" class="form-check-label">
+                                                    Zertifikate automatisch akzeptieren
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label asp-for="Timeout" class="form-label">Timeout (ms)</label>
+                                            <input asp-for="Timeout" type="number" class="form-control" />
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label asp-for="SessionTimeout" class="form-label">Session Timeout (ms)</label>
+                                            <input asp-for="SessionTimeout" type="number" class="form-control" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                <i class="bi bi-plug-fill"></i> Verbinden
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            $('#useAuth').change(function() {
+                $('#authSection').toggle(this.checked);
+            });
+            
+            if ($('#UseAuthentication').is(':checked')) {
+                $('#authSection').show();
+            }
+
+            $('.recent-url').click(function() {
+                $('#ServerUrl').val($(this).data('url'));
+            });
+        });
+    </script>
+}

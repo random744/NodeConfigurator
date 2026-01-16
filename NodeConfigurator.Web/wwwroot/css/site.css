@@ -1,0 +1,199 @@
+/* Root Variables */
+:root {
+    --primary-color: #0078D4;
+    --primary-hover: #106EBE;
+    --success-color: #107C10;
+    --danger-color: #E81123;
+    --warning-color: #FFB900;
+    --info-color: #00BCF2;
+    --light-bg: #F3F3F3;
+    --border-color: #D0D0D0;
+}
+
+/* General Styles */
+html {
+    height: 100%;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--light-bg);
+}
+
+main {
+    flex: 1;
+}
+
+/* Bootstrap Overrides */
+.btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-hover);
+    border-color: var(--primary-hover);
+}
+
+.bg-primary {
+    background-color: var(--primary-color) !important;
+}
+
+.text-primary {
+    color: var(--primary-color) !important;
+}
+
+/* Card Styles */
+.card {
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1.5rem;
+}
+
+.card-header {
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    font-weight: 600;
+}
+
+/* Badge Styles */
+.badge {
+    padding: 0.5em 0.75em;
+    font-weight: 500;
+}
+
+/* Navigation */
+.navbar-brand {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.nav-link {
+    transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+    opacity: 0.8;
+}
+
+/* Footer */
+.footer {
+    border-top: 1px solid var(--border-color);
+}
+
+/* Tree View Styles */
+#treeview {
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    padding: 10px;
+    background-color: white;
+}
+
+.jstree-default .jstree-clicked {
+    background: var(--primary-color) !important;
+    color: white !important;
+}
+
+.jstree-default .jstree-hovered {
+    background: #e7f3ff !important;
+}
+
+/* Selected Nodes */
+.selected-node-item {
+    background-color: white;
+    transition: all 0.3s ease;
+}
+
+.selected-node-item:hover {
+    background-color: #f8f9fa;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.remove-node {
+    transition: all 0.2s ease;
+}
+
+.remove-node:hover {
+    transform: scale(1.1);
+}
+
+/* Node Details */
+#nodeDetails {
+    background-color: white;
+}
+
+#nodeDetails .detail-label {
+    font-weight: 600;
+    color: #666;
+}
+
+#nodeDetails .detail-value {
+    color: #333;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.alert {
+    animation: fadeIn 0.3s ease;
+}
+
+/* Form Styles */
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(0, 120, 212, 0.25);
+}
+
+/* Buttons */
+.btn {
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Accordion */
+.accordion-button:not(.collapsed) {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.accordion-button:focus {
+    box-shadow: 0 0 0 0.2rem rgba(0, 120, 212, 0.25);
+}
+
+/* Loading Spinner */
+.spinner-border-sm {
+    width: 1rem;
+    height: 1rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .navbar-brand {
+        font-size: 1.2rem;
+    }
+    
+    #treeview,
+    #selectedNodes,
+    #nodeDetails {
+        height: 400px !important;
+    }
+}

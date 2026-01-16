@@ -1,6 +1,6 @@
-# NodeConfigurator - OPC-UA Variable Manager
+# NodeConfigurator - OPC-UA Node Management Web Application
 
-Eine moderne WPF-Anwendung für die Verwaltung und Konfiguration von OPC-UA Server-Variablen.
+Eine moderne ASP.NET Core 8 MVC Web-Anwendung für die Verwaltung und Konfiguration von OPC-UA Server-Variablen.
 
 ## 🎯 Features
 
@@ -12,32 +12,35 @@ Eine moderne WPF-Anwendung für die Verwaltung und Konfiguration von OPC-UA Serv
 - **Werte lesen und schreiben** für OPC-UA Variablen
 - **Konfigurationsverwaltung** - Speichern und Laden von Variablensets als JSON
 
-### Benutzeroberfläche
-- **Moderne Material Design UI** mit ansprechenden Farben und Animationen
-- **Responsive Layout** mit verstellbaren Panels (GridSplitter)
-- **Such- und Filterfunktionen** für schnelles Finden von Knoten
-- **Status-Indikator** mit farblicher Kennzeichnung des Verbindungsstatus
-- **Fortschrittsanzeige** während längerer Operationen
-- **Icons für Node-Typen** (Objekte, Variablen, Methoden)
-- **DataType-Badges** für Variablen
+### Web-Interface Features
+- **Moderne Browser-basierte UI** mit Bootstrap 5
+- **Responsive Design** - funktioniert auf Desktop, Tablet und Mobile
+- **Session-Management** für mehrere gleichzeitige Benutzer
+- **Real-time Updates** via AJAX
+- **jsTree Integration** für hierarchische Navigation
+- **Deutsche Lokalisierung** der gesamten Benutzeroberfläche
 
 ### Export-Funktionen
-- Export als JSON
-- Export als XML
-- Export als CSV
+- Export als JSON (strukturiert mit Metadaten)
+- Export als XML (standardisiertes Format)
+- Export als CSV (Excel-kompatibel)
 
 ## 🚀 Installation
 
 ### Voraussetzungen
 - .NET 8 SDK oder höher
-- Windows 10/11 (für WPF)
-- Visual Studio 2022 oder höher (empfohlen) oder Rider
+- Moderner Webbrowser (Chrome, Firefox, Edge, Safari)
+- Optional: OPC-UA Test-Server für Entwicklung
 
-### Installation
+### Installation und Start
+
 ```bash
 # Repository klonen
 git clone https://github.com/random744/NodeConfigurator.git
 cd NodeConfigurator
+
+# In das Web-Projektverzeichnis wechseln
+cd NodeConfigurator.Web
 
 # NuGet-Pakete wiederherstellen
 dotnet restore
@@ -46,103 +49,119 @@ dotnet restore
 dotnet build
 
 # Anwendung starten
-dotnet run --project NodeConfigurator/NodeConfigurator.csproj
+dotnet run
 ```
+
+Die Anwendung ist dann unter **https://localhost:5001** oder **http://localhost:5000** erreichbar.
 
 ## 📖 Verwendung
 
 ### 1. Mit OPC-UA Server verbinden
-1. Geben Sie die Server-URL in die Toolbar ein (z.B. `opc.tcp://localhost:4840`)
-2. Klicken Sie auf **⚙️ Einstellungen** für erweiterte Verbindungsoptionen:
+1. Öffnen Sie die Anwendung im Browser: `https://localhost:5001`
+2. Navigieren Sie zu **Verbinden** in der Navigationsleiste
+3. Geben Sie die Server-URL ein (z.B. `opc.tcp://localhost:4840`)
+4. Optional: Konfigurieren Sie erweiterte Einstellungen
    - Authentifizierung (Username/Passwort)
    - Sicherheitseinstellungen (SecurityMode, SecurityPolicy)
    - Zertifikatsverwaltung
    - Timeout-Einstellungen
-3. Klicken Sie auf **🔌 Verbinden**
-4. Bei erfolgreicher Verbindung wird der Status-Indikator grün
+5. Klicken Sie auf **Verbinden**
+6. Bei erfolgreicher Verbindung erscheint ein grüner "Verbunden"-Badge
 
 ### 2. Knoten durchsuchen
-- Der Baum zeigt alle verfügbaren Knoten hierarchisch an
-- Klicken Sie auf den Pfeil zum Erweitern von Knoten
-- Nutzen Sie die Filteroptionen (Variablen, Objekte, Methoden)
-- Verwenden Sie die Suchfunktion für schnelles Finden
+1. Navigieren Sie zu **Durchsuchen**
+2. Der Baum zeigt alle verfügbaren Knoten hierarchisch an
+3. Klicken Sie auf Knoten zum Erweitern
+4. Nutzen Sie die Suchfunktion für schnelles Finden
+5. Wählen Sie Variablen mit Checkboxen aus
 
-### 3. Variablen auswählen
-- Aktivieren Sie die Checkbox bei Variablen zum Auswählen
-- Ausgewählte Variablen erscheinen im rechten Panel
-- Entfernen Sie Variablen mit dem ❌-Button
+### 3. Variablen verwalten
+- Ausgewählte Variablen erscheinen im rechten Panel "Ausgewählte Variablen"
+- Klicken Sie auf einen Knoten für Details im Details-Panel
+- Klicken Sie "Wert lesen" um den aktuellen Wert anzuzeigen
+- Entfernen Sie Variablen mit dem X-Button
 
-### 4. Konfiguration speichern
-1. Menü: **Datei** → **Konfiguration speichern...**
-2. Wählen Sie einen Speicherort
-3. Die Konfiguration wird als JSON-Datei gespeichert
+### 4. Konfiguration exportieren
+1. Navigieren Sie zu **Export**
+2. Wählen Sie das gewünschte Format (JSON, XML, CSV)
+3. Die Datei wird automatisch heruntergeladen
 
-### 5. Konfiguration laden
-1. Menü: **Datei** → **Konfiguration laden...**
-2. Wählen Sie eine JSON-Konfigurationsdatei
-3. Alle gespeicherten Variablen werden wiederhergestellt
+### 5. Konfiguration importieren
+1. Navigieren Sie zu **Import**
+2. Wählen Sie eine zuvor exportierte JSON-Datei
+3. Die Variablen werden zur aktuellen Auswahl hinzugefügt
 
 ## 🛠️ Technologie-Stack
 
 - **.NET 8** - Moderne .NET-Plattform
-- **WPF (Windows Presentation Foundation)** - Rich Desktop UI Framework
-- **MVVM Pattern** - Saubere Architektur mit Model-View-ViewModel
+- **ASP.NET Core MVC** - Web-Framework mit Model-View-Controller Pattern
+- **Bootstrap 5** - Responsive UI Framework
+- **jQuery** - JavaScript Library für DOM-Manipulation
+- **jsTree** - Interactive Tree View Component
 - **OPC Foundation .NET Standard** - Offizielle OPC-UA Implementierung
-  - OPCFoundation.NetStandard.Opc.Ua (1.5.374.158)
-  - OPCFoundation.NetStandard.Opc.Ua.Client (1.5.374.158)
+  - OPCFoundation.NetStandard.Opc.Ua (1.5.374.54)
+  - OPCFoundation.NetStandard.Opc.Ua.Client (1.5.374.54)
 
 ## 📁 Projektstruktur
 
 ```
-NodeConfigurator/
-├── NodeConfigurator.sln              # Visual Studio Solution
-├── NodeConfigurator/
-│   ├── NodeConfigurator.csproj       # Projektdatei
-│   ├── App.xaml                       # Application mit Styles
-│   ├── App.xaml.cs
-│   ├── Views/                         # UI Views
-│   │   ├── MainWindow.xaml
-│   │   ├── MainWindow.xaml.cs
-│   │   ├── ConnectionDialog.xaml
-│   │   └── ConnectionDialog.xaml.cs
-│   ├── ViewModels/                    # MVVM ViewModels
-│   │   ├── ViewModelBase.cs
-│   │   ├── MainViewModel.cs
-│   │   ├── TreeNodeViewModel.cs
-│   │   └── ConnectionViewModel.cs
-│   ├── Models/                        # Datenmodelle
-│   │   ├── NodeConfiguration.cs
-│   │   ├── ServerConnectionConfig.cs
-│   │   └── SelectedNode.cs
-│   ├── Services/                      # Business Logic
-│   │   ├── IOpcUaClientService.cs
-│   │   └── OpcUaClientService.cs
-│   ├── Converters/                    # XAML Value Converters
-│   │   ├── BoolToVisibilityConverter.cs
-│   │   └── NodeClassToIconConverter.cs
-│   └── Commands/                      # Command Pattern
-│       └── RelayCommand.cs
-├── README.md
-└── .gitignore
+NodeConfigurator.Web/
+├── NodeConfigurator.Web.csproj    # Projektdatei
+├── Program.cs                      # Application Entry Point
+├── appsettings.json                # Konfiguration
+├── Controllers/                    # MVC Controllers
+│   ├── HomeController.cs
+│   ├── OpcUaController.cs
+│   └── ConfigurationController.cs
+├── Views/                          # Razor Views
+│   ├── Shared/
+│   │   └── _Layout.cshtml
+│   ├── Home/
+│   │   └── Index.cshtml
+│   ├── OpcUa/
+│   │   ├── Connect.cshtml
+│   │   └── Browse.cshtml
+│   └── Configuration/
+│       ├── Export.cshtml
+│       └── Import.cshtml
+├── Models/                         # Datenmodelle
+│   ├── NodeConfiguration.cs
+│   ├── ServerConnectionConfig.cs
+│   ├── SelectedNode.cs
+│   └── ViewModels/
+│       ├── ConnectionViewModel.cs
+│       ├── BrowseViewModel.cs
+│       └── NodeViewModel.cs
+├── Services/                       # Business Logic
+│   ├── IOpcUaClientService.cs
+│   ├── OpcUaClientService.cs
+│   └── SessionManagerService.cs
+└── wwwroot/                        # Static Files
+    ├── css/
+    │   └── site.css
+    └── js/
+        ├── site.js
+        └── opcua-browser.js
 ```
 
 ## 🎨 UI-Komponenten
 
 ### Farbschema
 - **Primary**: #0078D4 (Microsoft Blue)
-- **Accent**: #106EBE (Dunkleres Blue)
 - **Success**: #107C10 (Grün)
-- **Error**: #E81123 (Rot)
+- **Danger**: #E81123 (Rot)
+- **Warning**: #FFB900 (Gelb)
+- **Info**: #00BCF2 (Cyan)
 - **Background**: #F3F3F3 (Hellgrau)
-- **Border**: #D0D0D0 (Grau)
 
-### Styles
-- ModernButton - Primärer Button mit Hover-Effekten
-- SecondaryButton - Sekundärer Button mit Outline
-- DangerButton - Roter Button für Lösch-Aktionen
-- ModernTextBox - Eingabefelder mit Border-Radius
-- ModernComboBox - Dropdown mit angepasstem Design
-- GroupBox - Gruppierte Inhalte mit Header
+### Features der Benutzeroberfläche
+- Responsive Navigation mit Bootstrap 5
+- Verbindungsstatus-Anzeige in der Navbar
+- Toast-Benachrichtigungen für Benutzer-Feedback
+- Interaktiver Baum mit jsTree
+- Collapsible Panels für erweiterte Einstellungen
+- Icon-basierte Navigation
+- Moderne Card-Layouts
 
 ## 🔧 Entwicklung
 
@@ -158,30 +177,48 @@ dotnet build -c Release
 dotnet test
 
 # Publish für Deployment
-dotnet publish -c Release -r win-x64 --self-contained
+dotnet publish -c Release -o ./publish
 ```
 
-### Erweiterungen
-Das Projekt ist erweiterbar für:
-- Weitere Export-Formate
-- Historische Daten-Abfrage
-- Alarm & Event Management
-- Daten-Visualisierung (Charts)
-- Batch-Operationen
-- Scripting-Unterstützung
+### Entwicklungsserver starten
+```bash
+# Mit Hot Reload für Entwicklung
+dotnet watch run
+```
 
-## 📋 Roadmap
+Der Server startet automatisch neu bei Code-Änderungen.
 
-- [ ] Implementierung aller Export-Funktionen (XML, CSV)
-- [ ] Erweiterte Such- und Filterfunktionen
-- [ ] Historische Daten-Abfrage
-- [ ] Werte-Schreibfunktion mit Validierung
-- [ ] Alarm & Event Subscription
-- [ ] Mehrsprachige UI (Englisch, Deutsch)
-- [ ] Dark Mode
-- [ ] Datenvisualisierung mit Live-Charts
-- [ ] Scripting mit C# oder Python
-- [ ] Plugin-System
+## 🌐 Browser-Kompatibilität
+
+- Chrome/Edge (empfohlen) - Version 90+
+- Firefox - Version 88+
+- Safari - Version 14+
+
+## 📋 Architektur
+
+### Session-Management
+Die Anwendung verwendet ASP.NET Core Sessions für:
+- Verbindungsstatus pro Benutzer
+- Ausgewählte Variablen pro Session
+- Isolation zwischen verschiedenen Benutzern
+
+### Service-Layer
+- **OpcUaClientService**: Singleton für OPC-UA Verbindungen
+- **SessionManagerService**: Singleton für Session-Verwaltung
+- Dependency Injection für lose Kopplung
+
+### MVC-Pattern
+- **Models**: Datenstrukturen und Business-Objekte
+- **Views**: Razor-Templates für HTML-Rendering
+- **Controllers**: Request-Handling und Response-Generierung
+
+## 🔒 Sicherheit
+
+- HTTPS-Unterstützung
+- Session-basierte Authentifizierung
+- XSS-Schutz durch Razor-Encoding
+- CSRF-Schutz für Form-Posts
+- Sichere Cookie-Konfiguration
 
 ## 📄 Lizenz
 
@@ -197,4 +234,4 @@ Bei Fragen oder Problemen öffnen Sie bitte ein Issue auf GitHub.
 
 ---
 
-**NodeConfigurator** - Ihre Lösung für professionelles OPC-UA Node Management
+**NodeConfigurator** - Ihre professionelle Web-Lösung für OPC-UA Node Management

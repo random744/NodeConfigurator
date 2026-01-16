@@ -1,0 +1,97 @@
+@{
+    ViewData["Title"] = "Home";
+}
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <div class="text-center mb-5">
+                <h1 class="display-4">
+                    <i class="bi bi-gear-fill text-primary"></i>
+                    NodeConfigurator
+                </h1>
+                <p class="lead">Professionelle OPC-UA Node-Verwaltung im Browser</p>
+            </div>
+
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h2 class="card-title h4">
+                        <i class="bi bi-star-fill text-warning"></i> Features
+                    </h2>
+                    <ul class="list-unstyled mt-3">
+                        <li class="mb-2">
+                            <i class="bi bi-check-circle-fill text-success"></i>
+                            <strong>OPC-UA Server-Verbindung</strong> mit flexibler Authentifizierung
+                        </li>
+                        <li class="mb-2">
+                            <i class="bi bi-check-circle-fill text-success"></i>
+                            <strong>Hierarchische Baum-Ansicht</strong> aller Server-Knoten
+                        </li>
+                        <li class="mb-2">
+                            <i class="bi bi-check-circle-fill text-success"></i>
+                            <strong>Lazy Loading</strong> für optimale Performance
+                        </li>
+                        <li class="mb-2">
+                            <i class="bi bi-check-circle-fill text-success"></i>
+                            <strong>Variablen auswählen</strong> mit Checkbox-Unterstützung
+                        </li>
+                        <li class="mb-2">
+                            <i class="bi bi-check-circle-fill text-success"></i>
+                            <strong>Export-Funktionen</strong> (JSON, XML, CSV)
+                        </li>
+                        <li class="mb-2">
+                            <i class="bi bi-check-circle-fill text-success"></i>
+                            <strong>Import-Funktion</strong> für gespeicherte Konfigurationen
+                        </li>
+                        <li class="mb-2">
+                            <i class="bi bi-check-circle-fill text-success"></i>
+                            <strong>Werte lesen</strong> in Echtzeit
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h2 class="card-title h4">
+                        <i class="bi bi-rocket-fill text-primary"></i> Quick Start
+                    </h2>
+                    <ol class="mt-3">
+                        <li class="mb-2">
+                            Klicken Sie auf <a href="@Url.Action("Connect", "OpcUa")" class="btn btn-sm btn-primary">
+                                <i class="bi bi-plug-fill"></i> Verbinden
+                            </a> in der Navigation
+                        </li>
+                        <li class="mb-2">
+                            Geben Sie die Server-URL ein (z.B. <code>opc.tcp://localhost:4840</code>)
+                        </li>
+                        <li class="mb-2">
+                            Klicken Sie auf "Verbinden" um eine Verbindung herzustellen
+                        </li>
+                        <li class="mb-2">
+                            Durchsuchen Sie die Node-Hierarchie und wählen Sie Variablen aus
+                        </li>
+                        <li class="mb-2">
+                            Exportieren Sie Ihre Konfiguration als JSON, XML oder CSV
+                        </li>
+                    </ol>
+                </div>
+            </div>
+
+            <div class="text-center">
+                @if (ViewBag.IsConnected == true)
+                {
+                    <a href="@Url.Action("Browse", "OpcUa")" class="btn btn-success btn-lg">
+                        <i class="bi bi-tree-fill"></i> Jetzt durchsuchen
+                    </a>
+                }
+                else
+                {
+                    <a href="@Url.Action("Connect", "OpcUa")" class="btn btn-primary btn-lg">
+                        <i class="bi bi-plug-fill"></i> Jetzt verbinden
+                    </a>
+                }
+            </div>
+        </div>
+    </div>
+</div>
