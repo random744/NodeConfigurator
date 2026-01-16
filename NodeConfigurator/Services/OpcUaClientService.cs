@@ -52,7 +52,6 @@ namespace NodeConfigurator.Services
                 await _configuration.Validate(ApplicationType.Client);
 
                 // Certificate validation
-                bool certValidator = true;
                 _configuration.CertificateValidator.CertificateValidation += (sender, e) =>
                 {
                     if (e.Error.StatusCode == StatusCodes.BadCertificateUntrusted && config.AutoAcceptCertificates)

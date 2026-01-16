@@ -159,8 +159,8 @@
                         BorderBrush="{StaticResource BorderBrush}"
                         BorderThickness="1"
                         Margin="5,0,5,5">
-                    <TreeView ItemsSource="{Binding RootNodes}"
-                              SelectedItem="{Binding SelectedNode}"
+                    <TreeView x:Name="NodeTreeView"
+                              ItemsSource="{Binding RootNodes}"
                               VirtualizingPanel.IsVirtualizing="True"
                               VirtualizingPanel.VirtualizationMode="Recycling">
                         <TreeView.ItemTemplate>
