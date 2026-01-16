@@ -1,0 +1,54 @@
+@{
+    ViewData["Title"] = "Import";
+}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <h2>
+                <i class="bi bi-upload"></i> Konfiguration importieren
+            </h2>
+
+            <div class="card mt-4">
+                <div class="card-body">
+                    <div class="alert alert-info">
+                        <i class="bi bi-info-circle-fill"></i>
+                        Importieren Sie eine zuvor exportierte JSON-Konfigurationsdatei.
+                    </div>
+
+                    <form asp-action="ImportJson" method="post" enctype="multipart/form-data">
+                        <div class="mb-3">
+                            <label for="file" class="form-label">JSON-Datei auswählen</label>
+                            <input type="file" class="form-control" id="file" name="file" accept=".json" required />
+                            <div class="form-text">
+                                Unterstützte Formate: .json
+                            </div>
+                        </div>
+
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                <i class="bi bi-upload"></i> Datei importieren
+                            </button>
+                        </div>
+                    </form>
+
+                    <hr class="my-4" />
+
+                    <div class="card bg-light">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <i class="bi bi-question-circle"></i> Hinweise zum Import
+                            </h5>
+                            <ul class="mb-0">
+                                <li>Importierte Variablen werden zur bestehenden Auswahl hinzugefügt</li>
+                                <li>Duplikate werden automatisch vermieden</li>
+                                <li>Die Datei muss im NodeConfigurator-JSON-Format vorliegen</li>
+                                <li>Nach dem Import können Sie die Variablen im Browser sehen</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
