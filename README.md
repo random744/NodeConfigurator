@@ -88,8 +88,8 @@ dotnet run --project NodeConfigurator/NodeConfigurator.csproj
 - **WPF (Windows Presentation Foundation)** - Rich Desktop UI Framework
 - **MVVM Pattern** - Saubere Architektur mit Model-View-ViewModel
 - **OPC Foundation .NET Standard** - Offizielle OPC-UA Implementierung
-  - OPCFoundation.NetStandard.Opc.Ua (1.5.374.54)
-  - OPCFoundation.NetStandard.Opc.Ua.Client (1.5.374.54)
+  - OPCFoundation.NetStandard.Opc.Ua (1.5.374.158)
+  - OPCFoundation.NetStandard.Opc.Ua.Client (1.5.374.158)
 
 ## 📁 Projektstruktur
 
