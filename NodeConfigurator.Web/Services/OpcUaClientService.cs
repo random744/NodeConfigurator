@@ -54,7 +54,7 @@ namespace NodeConfigurator.Web.Services
                 // Certificate validation
                 _configuration.CertificateValidator.CertificateValidation += (sender, e) =>
                 {
-                    if (e.Error.StatusCode == StatusCodes.BadCertificateUntrusted && config.AutoAcceptCertificates)
+                    if (e.Error.StatusCode == Opc.Ua.StatusCodes.BadCertificateUntrusted && config.AutoAcceptCertificates)
                     {
                         e.Accept = true;
                     }
@@ -194,7 +194,7 @@ namespace NodeConfigurator.Web.Services
         {
             if (_session == null || !_session.Connected)
             {
-                return new DataValue(StatusCodes.BadNotConnected);
+                return new DataValue(Opc.Ua.StatusCodes.BadNotConnected);
             }
 
             try
@@ -203,7 +203,7 @@ namespace NodeConfigurator.Web.Services
             }
             catch (Exception)
             {
-                return new DataValue(StatusCodes.Bad);
+                return new DataValue(Opc.Ua.StatusCodes.Bad);
             }
         }
     }
